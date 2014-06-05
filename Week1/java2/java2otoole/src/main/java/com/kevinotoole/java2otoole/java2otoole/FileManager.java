@@ -1,6 +1,7 @@
 package com.kevinotoole.java2otoole.java2otoole;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -33,11 +34,9 @@ public class FileManager {
         try {
             fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
             fos.write(content.getBytes());
-            result = true;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            Log.i("WRITE STRING FILE", "success");
+        } catch (Exception e) {
+            Log.e("WRITE FILE ERROR", e.toString());
         }
         return result;
     }
@@ -54,17 +53,22 @@ public class FileManager {
             int bytesRead = 0;
             StringBuffer contentBuffer = new StringBuffer();
 
-            while ((bytesRead = bis.read(contentBytes)) != -1){
+            while ((bytesRead = bis.read(contentBytes)) != -1) {
                 content = new String(contentBytes, 0, bytesRead);
                 contentBuffer.append(content);
             }
             content = contentBuffer.toString();
-            fis.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        } catch (Exception e){
+
+        } finally {
+            try {
+                fis.close();
+            } catch (IOException e){
+                Log.e("CLOSE FILE ERROR", e.toString());
+            }
         }
+
         return content;
     }
 }
