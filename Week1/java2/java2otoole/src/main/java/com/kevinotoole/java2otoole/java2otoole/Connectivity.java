@@ -6,7 +6,9 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 /**
- * Created by kevinotoole on 6/4/14.
+ * Kevin O'Toole
+ * Java 2 Term 1406
+ * Week 1 Project
  */
 public class Connectivity {
 
