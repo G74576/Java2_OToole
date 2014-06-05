@@ -5,4 +5,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Connectivity Class String -->
+    <!-- LOG String -->
+    <string name="connType">Connection Type: </string>
+
+    <!-- Connection Alert Strings -->
+    <!-- No Connection -->
+    <string name="noConnection">No connection detected! Please connect to a network and try again.</string>
+    <!-- OK String -->
+    <string name="okBtn">OK</string>
+
+
 </resources>

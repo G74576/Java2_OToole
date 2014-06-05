@@ -6,17 +6,42 @@ package com.kevinotoole.java2otoole.java2otoole;
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
+
+    public boolean connected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Check for connection:
+        connected = Connectivity.getNetworkStatus(this);
+        if (!connected){
+            //Alert if not connected:
+            AlertDialog.Builder noConnection = new AlertDialog.Builder(this);
+            noConnection.setMessage(getString(R.string.noConnection)).setCancelable(false).setPositiveButton(getString(R.string.okBtn), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            AlertDialog alertDialog = noConnection.create();
+            alertDialog.show();
+        }
+        else if (connected){
+            //Toast.makeText(this, "You are connected to " + Connectivity.getConnectionType(this), Toast.LENGTH_LONG).show();
+            //Do something!!!!!!
+
+        }
     }
 
 
