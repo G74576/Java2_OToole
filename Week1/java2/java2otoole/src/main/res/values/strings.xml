@@ -15,5 +15,9 @@
     <!-- OK String -->
     <string name="okBtn">OK</string>
 
+    <!-- Main Activity Strings -->
+    <!-- File Name String -->
+    <string name="fileN">JSONData.txt</string>
+
 
 </resources>
