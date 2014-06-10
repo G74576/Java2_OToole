@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.Messenger;
@@ -94,7 +95,9 @@ public class MainActivity extends Activity {
                 if (!connected){
                     //Alert if not connected:
                     AlertDialog.Builder noConnection = new AlertDialog.Builder(mContext);
-                    noConnection.setMessage(getString(R.string.noConnection)).setCancelable(false).setPositiveButton(getString(R.string.okBtn), new DialogInterface.OnClickListener() {
+                    noConnection.setMessage(getString(R.string.noConnection))
+                            .setCancelable(false)
+                            .setPositiveButton(getString(R.string.okBtn), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.cancel();
@@ -269,12 +272,16 @@ public class MainActivity extends Activity {
 
                 //Alert of rating of image from detail view:
                 AlertDialog.Builder ratingAlert = new AlertDialog.Builder(mContext);
-                ratingAlert.setTitle(getString(R.string.ratinga) + " " + detail_userName + getString(R.string.ratingb)).setMessage(getString(R.string.ratingc) + " " + detail_rating).setCancelable(false).setPositiveButton(getString(R.string.ratingBtn), new DialogInterface.OnClickListener() {
+                ratingAlert.setTitle(getString(R.string.ratinga) + " " + detail_userName + getString(R.string.ratingb))
+                        .setMessage(getString(R.string.ratingc) + " " + detail_rating)
+                        .setCancelable(false)
+                        .setPositiveButton(getString(R.string.ratingBtn), new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    public void onClick(DialogInterface dialogInterface, int id) {
                         dialogInterface.dismiss();
                     }
                 });
+
                 AlertDialog alertDialog = ratingAlert.create();
                 alertDialog.show();
 
