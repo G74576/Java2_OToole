@@ -87,6 +87,7 @@ public class DetailView extends Activity {
 
         Intent detailsBackIntent = new Intent();
         detailsBackIntent.putExtra("detailUserName", userName);
+        detailsBackIntent.putExtra("detailsSearchImage", searchImg);
         detailsBackIntent.putExtra("detailRating", ratingSelected);
 
         setResult(RESULT_OK, detailsBackIntent);

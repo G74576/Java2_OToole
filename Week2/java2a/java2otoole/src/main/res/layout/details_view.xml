@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text=""
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:id="@+id/detailUN"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/detailPI"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text=""
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:id="@+id/detailFN"
         android:layout_toRightOf="@+id/detailPI"
         android:layout_alignParentRight="true"
@@ -68,6 +68,8 @@
         android:stepSize="0.5"
         android:numStars="5"
         android:layout_below="@+id/detailSI"
+        android:scaleX="0.75"
+        android:scaleY="0.75"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -77,6 +79,15 @@
         android:id="@+id/button"
         android:textColor="#FFFF00"
         android:layout_below="@+id/ratingbar"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/rate"
+        android:id="@+id/textView"
+        android:layout_above="@+id/button"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

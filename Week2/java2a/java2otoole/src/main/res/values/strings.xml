@@ -12,12 +12,15 @@
     <!-- Main Activity Class Strings -->
     <!-- File Name String -->
     <string name="fileN">JSONData.txt</string>
-
     <!-- Connection Alert Strings -->
     <!-- No Connection -->
     <string name="noConnection">No connection detected! Please connect to a network and try again.</string>
     <!-- OK String -->
     <string name="okBtn">OK</string>
+    <string name="ratinga">You gave Username:</string>
+    <string name="ratingb">\'s photo</string>
+    <string name="ratingc">A rating of:</string>
+    <string name="ratingBtn">OK</string>
 
     <!-- Main Activity Layout Strings -->
     <!-- Header -->
@@ -30,6 +33,7 @@
     <!-- Detail View Layout Strings -->
     <!-- Button String -->
     <string name="detailbtn">View image in Instagram</string>
+    <string name="rate">Rate this image!</string>
 
     <!-- Image Views Content Descriptions -->
     <string name="contPI">User Profile Image</string>

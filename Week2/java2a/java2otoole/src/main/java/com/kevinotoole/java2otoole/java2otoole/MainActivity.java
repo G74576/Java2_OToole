@@ -49,7 +49,8 @@ public class MainActivity extends Activity {
     public static ListView listView;
     Button searchButton;
     public static String url; // "https://api.instagram.com/v1/tags/USMC/media/recent?access_token=188207900.f59def8.726418d4d14945898ae397a2eca002de";
-
+    String detail_userName, detail_searchImage;
+    Float detail_rating;
 
 
     ArrayList<UsersInfo> userList = new ArrayList<UsersInfo>();
@@ -177,7 +178,16 @@ public class MainActivity extends Activity {
             customAdapter = new CustomAdapter();
             listView.setAdapter(customAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                String username, fullname, profimage, searchimage, imaglink;
+                String username
+                        ,
+                        fullname
+                        ,
+                        profimage
+                        ,
+                        searchimage
+                        ,
+                        imaglink;
+
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long row) {
                     username = userList.get(position).user_name;
@@ -250,6 +260,26 @@ public class MainActivity extends Activity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         Log.i("MAIN ACTIVITY", "onActivityResult()");
+
+        if (resultCode == RESULT_OK && requestCode == 0){
+            if (data.hasExtra("detailUserName") && data.hasExtra("detailsSearchImage") && data.hasExtra("detailRating")){
+                detail_userName = data.getExtras().getString("detailUserName");
+                detail_searchImage = data.getExtras().getString("detailsSearchImage");
+                detail_rating = data.getExtras().getFloat("detailRating");
+
+                //Alert of rating of image from detail view:
+                AlertDialog.Builder ratingAlert = new AlertDialog.Builder(mContext);
+                ratingAlert.setTitle(getString(R.string.ratinga) + " " + detail_userName + getString(R.string.ratingb)).setMessage(getString(R.string.ratingc) + " " + detail_rating).setCancelable(false).setPositiveButton(getString(R.string.ratingBtn), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog alertDialog = ratingAlert.create();
+                alertDialog.show();
+
+            }
+        }
     }
 
 
