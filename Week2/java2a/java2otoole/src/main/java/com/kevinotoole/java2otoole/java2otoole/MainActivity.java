@@ -10,7 +10,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.Messenger;
@@ -181,15 +180,7 @@ public class MainActivity extends Activity {
             customAdapter = new CustomAdapter();
             listView.setAdapter(customAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                String username
-                        ,
-                        fullname
-                        ,
-                        profimage
-                        ,
-                        searchimage
-                        ,
-                        imaglink;
+                String username, fullname, profimage, searchimage, imaglink;
 
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long row) {
@@ -214,7 +205,7 @@ public class MainActivity extends Activity {
         }
     }
 
-
+    //Custom Adapter for list view
     class CustomAdapter extends ArrayAdapter<UsersInfo> {
         CustomAdapter(){
             super(MainActivity.this, R.layout.list_row, userList);
@@ -235,6 +226,7 @@ public class MainActivity extends Activity {
         }
     }
 
+    //ViewHolder for CustomAdapter:
     class ViewHolder{
         public TextView uName = null;
         public ImageView uImage = null;
@@ -289,7 +281,15 @@ public class MainActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
