@@ -1,8 +1,15 @@
 package com.kevinotoole.java2otoole.java2otoole;
 /**
- * Kevin OToole
+ * Author: Kevin OToole
  * Java 2 Term 1406
  * Week 2 Project
+ * Project: USMC Instagram Photos
+ * Package: com.kevinotoole.java2otoole.java2otoole;
+ * File: MainActivity.java
+ * Purpose: This is the main activity of this application which launches on the start of the app.
+ *          From this page, users can click the button to search through recent photos that were
+ *          tagged on the Instagram Site with the tag "USMC".  Users can then click on any of the
+ *          list items to take them to a detail view of that item.
  */
 
 import android.app.Activity;
@@ -33,6 +40,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -55,7 +63,8 @@ public class MainActivity extends Activity {
 
     ArrayList<UsersInfo> userList = new ArrayList<UsersInfo>();
 
-    class UsersInfo {
+    static class UsersInfo implements Serializable {
+        private static long serialVersionUID = 1L;
         public String user_name;
         public String full_name;
         public String prof_url;
@@ -83,6 +92,23 @@ public class MainActivity extends Activity {
 
         //Set instance of FileManger:
         fileManager = FileManager.getInstance();
+
+        //Check whether we are recreating a previously destroyed instance:
+        if (savedInstanceState != null){
+            Log.d("MAIN", "Saved instance");
+
+            userList = (ArrayList<UsersInfo>)savedInstanceState.getSerializable("saved");
+            if (userList != null){
+                customAdapter = new CustomAdapter();
+                listView.setAdapter(customAdapter);
+            }
+            else{
+                Log.d("MAIN", "Saved = null");
+            }
+        }
+        else{
+            Log.d("MAIN", "no Saved instance");
+        }
 
         //Get Search Button by ID:
         searchButton = (Button) findViewById(R.id.searchBtn);
@@ -116,7 +142,6 @@ public class MainActivity extends Activity {
         });
 
     }
-
 
     public void getData(){
         final MyHandler myHandler = new MyHandler(this);
@@ -154,7 +179,7 @@ public class MainActivity extends Activity {
         }
     }
 
-
+    //Parse JSON Data to display in ListView
     public  void displayDataFromFile(){
         //Pull json from DDMS
         fileManager = FileManager.getInstance();
@@ -190,6 +215,7 @@ public class MainActivity extends Activity {
                     searchimage = userList.get(position).img_url;
                     imaglink = userList.get(position).img_link;
 
+                    //Send information to be used in Detail View
                     Intent detailView = new Intent(mContext, DetailView.class);
                     detailView.putExtra("USERNAME_KEY", username);
                     detailView.putExtra("FULLNAME_KEY", fullname);
@@ -284,11 +310,18 @@ public class MainActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        if (userList != null && !userList.isEmpty()){
+            outState.putSerializable("saved", userList);
+            Log.i("MAIN", "Saving instance state data");
+        }
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+            savedInstanceState.getSerializable("saved");
+
+            Log.i("MAIN", "Restoring instance state data");
     }
 
     @Override

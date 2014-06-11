@@ -6,9 +6,14 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 /**
- * Kevin OToole
+ * Author: Kevin OToole
  * Java 2 Term 1406
  * Week 2 Project
+ * Project: USMC Instagram Photos
+ * Package: com.kevinotoole.java2otoole.java2otoole;
+ * File: Connectivity.java
+ * Purpose: This purpose of this java file is to check the connectivity of the device which is
+ *          checked when the user clicks the browse button on the MainActivity page.
  */
 public class Connectivity {
 
@@ -29,12 +34,6 @@ public class Connectivity {
                 connected = true;
             }
         }
-    }
-
-    //Get the connection type:
-    public static String getConnectionType(Context context){
-        connectionStatus(context);
-        return connectionType;
     }
 
     //Get the network status:

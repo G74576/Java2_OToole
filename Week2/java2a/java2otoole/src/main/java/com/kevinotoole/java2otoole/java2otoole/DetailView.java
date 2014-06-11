@@ -14,9 +14,17 @@ import android.widget.TextView;
 import com.kevinotoole.java2otoole.java2otoole.imageLoader.ImageLoader;
 
 /**
- * Kevin OToole
+ * Author: Kevin OToole
  * Java 2 Term 1406
  * Week 2 Project
+ * Project: USMC Instagram Photos
+ * Package: com.kevinotoole.java2otoole.java2otoole;
+ * File: DetailView.java
+ * Purpose: This is the detail view page which was launched when the user clicked on an item in the
+ *          listview from the MainActivity page.  Here users can see a large image of the item
+ *          that was selected as well as information about the owner of the image.  Users can also
+ *          rate the image from 0-5 stars, and can also view the image on the instagram website by
+ *          clicking the button.
  */
 public class DetailView extends Activity {
     public String userName;

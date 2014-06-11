@@ -11,9 +11,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * Kevin OToole
+ * Author: Kevin OToole
  * Java 2 Term 1406
  * Week 2 Project
+ * Project: USMC Instagram Photos
+ * Package: com.kevinotoole.java2otoole.java2otoole;
+ * File: FileManager.java
+ * Purpose:
  */
 public class FileManager {
 

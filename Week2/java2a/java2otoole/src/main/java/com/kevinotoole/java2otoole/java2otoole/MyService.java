@@ -16,9 +16,13 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * Kevin OToole
+ * Author: Kevin OToole
  * Java 2 Term 1406
  * Week 2 Project
+ * Project: USMC Instagram Photos
+ * Package: com.kevinotoole.java2otoole.java2otoole;
+ * File: MyService.java
+ * Purpose:
  */
 public class MyService extends IntentService{
 
@@ -74,7 +78,7 @@ public class MyService extends IntentService{
             URLConnection connection = url.openConnection();
             BufferedInputStream bufferedInputStream = new BufferedInputStream(connection.getInputStream());
             byte[] contextByte = new byte[1024];
-            int bytesRead = 0;
+            int bytesRead;
             StringBuilder stringBuffer = new StringBuilder();
             while ((bytesRead = bufferedInputStream.read(contextByte)) != -1) {
                 response = new String(contextByte, 0, bytesRead);

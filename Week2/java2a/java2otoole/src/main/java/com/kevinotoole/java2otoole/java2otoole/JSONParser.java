@@ -17,9 +17,14 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 /**
- * Kevin OToole
+ * Author: Kevin OToole
  * Java 2 Term 1406
  * Week 2 Project
+ * Project: USMC Instagram Photos
+ * Package: com.kevinotoole.java2otoole.java2otoole;
+ * File: JSONParser.java
+ * Purpose: The purpose of this page is to Parse the URL from the MainActivity page into JSON from
+ *          which I can then pull information from the JSON Object to display in the application.
  */
 public class JSONParser {
 
