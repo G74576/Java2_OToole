@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp"
+        android:padding="2dp"
         android:background="#BA0000">
 
         <ImageView
@@ -19,7 +19,7 @@
             android:src="@drawable/egaimage"
             android:scaleType="fitXY"
             android:padding="3dp"
-            android:contentDescription="EGA"/>
+            android:contentDescription="@string/egaIM"/>
 
         <TextView
             android:layout_width="match_parent"

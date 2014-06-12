@@ -295,8 +295,6 @@ public class MainActivity extends Activity {
                 TextView headerText = (TextView)view.findViewById(R.id.dialogheader);
                 ratingAlert.setCustomTitle(view);
                 headerText.setText(getString(R.string.ratinga) + " " + detail_userName + getString(R.string.ratingb));
-                //ratingAlert.setTitle(getString(R.string.ratinga) + " " + detail_userName + getString(R.string.ratingb))
-                //        .setMessage(getString(R.string.ratingc) + " " + detail_rating)
                 TextView messageText = (TextView)view.findViewById(R.id.dialogMessage);
                 messageText.setText(getString(R.string.ratingc) + " " + detail_rating);
                         ratingAlert.setCancelable(false)
