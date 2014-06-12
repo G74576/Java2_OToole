@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
                     AlertDialog alertDialog = noConnection.create();
                     alertDialog.show();
                 }
-                else if (connected){
+                else{
                     //Toast.makeText(this, "You are connected to " + Connectivity.getConnectionType(this), Toast.LENGTH_LONG).show();
                     //Do something!!!!!!
                     userList.clear();
