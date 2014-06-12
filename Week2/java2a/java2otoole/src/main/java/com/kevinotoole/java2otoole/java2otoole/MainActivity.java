@@ -290,9 +290,16 @@ public class MainActivity extends Activity {
 
                 //Alert of rating of image from detail view:
                 AlertDialog.Builder ratingAlert = new AlertDialog.Builder(mContext);
-                ratingAlert.setTitle(getString(R.string.ratinga) + " " + detail_userName + getString(R.string.ratingb))
-                        .setMessage(getString(R.string.ratingc) + " " + detail_rating)
-                        .setCancelable(false)
+                LayoutInflater inflater = getLayoutInflater();
+                View view = inflater.inflate(R.layout.alert_dialog, null);
+                TextView headerText = (TextView)view.findViewById(R.id.dialogheader);
+                ratingAlert.setCustomTitle(view);
+                headerText.setText(getString(R.string.ratinga) + " " + detail_userName + getString(R.string.ratingb));
+                //ratingAlert.setTitle(getString(R.string.ratinga) + " " + detail_userName + getString(R.string.ratingb))
+                //        .setMessage(getString(R.string.ratingc) + " " + detail_rating)
+                TextView messageText = (TextView)view.findViewById(R.id.dialogMessage);
+                messageText.setText(getString(R.string.ratingc) + " " + detail_rating);
+                        ratingAlert.setCancelable(false)
                         .setPositiveButton(getString(R.string.ratingBtn), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int id) {
