@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">USMC Photos</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Connectivity Class String -->
+    <!-- LOG String -->
+    <string name="connType">Connection Type: </string>
+
+    <!-- Main Activity Class Strings -->
+    <!-- File Name String -->
+    <string name="fileN">JSONData.txt</string>
+    <!-- Connection Alert Strings -->
+    <!-- No Connection -->
+    <string name="noConnection">No connection detected! Please connect to a network and try again.</string>
+    <!-- OK String -->
+    <string name="okBtn">OK</string>
+    <string name="ratinga">You gave Username:</string>
+    <string name="ratingb">\'s photo</string>
+    <string name="ratingc">A rating of:</string>
+    <string name="ratingBtn">OK</string>
+
+    <!-- Main Activity Layout Strings -->
+    <!-- Header -->
+    <string name="header">Instagram Search</string>
+    <!-- Description -->
+    <string name="description">Browse through recent photos posted on Instagram with the tag \"USMC\"</string>
+    <!-- Button -->
+    <string name="browse">Browse</string>
+
+    <!-- Detail View Layout Strings -->
+    <!-- Button String -->
+    <string name="detailbtn">View image in Instagram</string>
+    <string name="rate">Rate this image!</string>
+
+    <!-- Image Views Content Descriptions -->
+    <string name="contPI">User Profile Image</string>
+    <string name="contTI">USMC Tagged Image</string>
+    <string name="egaIM">EGA</string>
+
+    <!-- List Row Strings -->
+    <!-- Image View Content Descriptions -->
+    <string name="lrContPI">User Profile Image</string>
+    <string name="lrContTI">USMC Tagged Image</string>
+
+</resources>
