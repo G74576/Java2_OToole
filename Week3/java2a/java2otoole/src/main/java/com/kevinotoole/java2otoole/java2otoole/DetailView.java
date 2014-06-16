@@ -16,7 +16,7 @@ import com.kevinotoole.java2otoole.java2otoole.imageLoader.ImageLoader;
 /**
  * Author: Kevin OToole
  * Java 2 Term 1406
- * Week 2 Project
+ * Week 3 Project
  * Project: USMC Instagram Photos
  * Package: com.kevinotoole.java2otoole.java2otoole;
  * File: DetailView.java

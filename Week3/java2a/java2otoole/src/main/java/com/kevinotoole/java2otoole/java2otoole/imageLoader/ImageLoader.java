@@ -25,7 +25,7 @@ import java.util.concurrent.Executors;
 /**
  * Kevin OToole
  * Java 2 Term 1406
- * Week 2 Project
+ * Week 3 Project
  */
 public class ImageLoader {
 

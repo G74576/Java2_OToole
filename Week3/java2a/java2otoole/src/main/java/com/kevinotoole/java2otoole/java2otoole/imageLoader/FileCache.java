@@ -3,7 +3,7 @@ package com.kevinotoole.java2otoole.java2otoole.imageLoader;
 /**
  * Kevin OToole
  * Java 2 Term 1406
- * Week 2 Project
+ * Week 3 Project
  */
 
 import android.content.Context;
