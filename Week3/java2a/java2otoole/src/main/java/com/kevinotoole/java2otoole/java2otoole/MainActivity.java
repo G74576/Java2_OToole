@@ -61,16 +61,7 @@ public class MainActivity extends Activity {
     Float detail_rating;
 
 
-    ArrayList<UsersInfo> userList = new ArrayList<UsersInfo>();
-
-    static class UsersInfo implements Serializable {
-        private static long serialVersionUID = 1L;
-        public String user_name;
-        public String full_name;
-        public String prof_url;
-        public String img_url;
-        public String img_link;
-    }
+    ArrayList<UserInfo> userList = new ArrayList<UserInfo>();
 
     private static final String TAG_DT = "data";
     private static final String TAG_UN = "username";
@@ -80,7 +71,7 @@ public class MainActivity extends Activity {
     private static final String TAG_LI = "link";
 
     JSONArray users = null;
-    CustomAdapter customAdapter = null;
+    CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,9 +88,9 @@ public class MainActivity extends Activity {
         if (savedInstanceState != null){
             Log.d("MAIN", "Saved instance");
 
-            userList = (ArrayList<UsersInfo>)savedInstanceState.getSerializable("saved");
+            userList = (ArrayList<UserInfo>)savedInstanceState.getSerializable("saved");
             if (userList != null){
-                customAdapter = new CustomAdapter();
+                customAdapter = new CustomAdapter(this, R.layout.list_row, userList);
                 listView.setAdapter(customAdapter);
             }
             else{
@@ -192,7 +183,7 @@ public class MainActivity extends Activity {
             users = jsonObject.getJSONArray(TAG_DT);
             for (int i = 0; i < users.length(); i++){
                 JSONObject c = users.getJSONObject(i);
-                UsersInfo results = new UsersInfo();
+                UserInfo results = new UserInfo();
                 results.user_name = c.getJSONObject("user").getString(TAG_UN);
                 results.full_name = c.getJSONObject("user").getString(TAG_FN);
                 results.prof_url = c.getJSONObject("user").getString(TAG_PI);
@@ -202,10 +193,10 @@ public class MainActivity extends Activity {
             }
 
             //Custom Adapter:
-            customAdapter = new CustomAdapter();
+            customAdapter = new CustomAdapter(this, R.layout.list_row, userList);
             listView.setAdapter(customAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                String username, fullname, profimage, searchimage, imaglink;
+                String username, fullname, profimage, searchimage, imagelink;
 
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long row) {
@@ -213,16 +204,9 @@ public class MainActivity extends Activity {
                     fullname = userList.get(position).full_name;
                     profimage = userList.get(position).prof_url;
                     searchimage = userList.get(position).img_url;
-                    imaglink = userList.get(position).img_link;
+                    imagelink = userList.get(position).img_link;
 
-                    //Send information to be used in Detail View
-                    Intent detailView = new Intent(mContext, DetailView.class);
-                    detailView.putExtra("USERNAME_KEY", username);
-                    detailView.putExtra("FULLNAME_KEY", fullname);
-                    detailView.putExtra("PROFILEIMG_KEY", profimage);
-                    detailView.putExtra("SEARCHIMG_KEY", searchimage);
-                    detailView.putExtra("LINK_KEY", imaglink);
-                    startActivityForResult(detailView, 0);
+                    startResultActivity(username, fullname, profimage, searchimage, imagelink);
                 }
             });
 
@@ -231,52 +215,15 @@ public class MainActivity extends Activity {
         }
     }
 
-    //Custom Adapter for list view
-    class CustomAdapter extends ArrayAdapter<UsersInfo> {
-        CustomAdapter(){
-            super(MainActivity.this, R.layout.list_row, userList);
-        }
-        public View getView(int position, View convertView, ViewGroup parent){
-            ViewHolder holder;
-            if (convertView == null){
-                LayoutInflater inflater = getLayoutInflater();
-                convertView = inflater.inflate(R.layout.list_row, null);
-                holder = new ViewHolder(convertView);
-                convertView.setTag(holder);
-            }
-            else {
-                holder = (ViewHolder)convertView.getTag();
-            }
-            holder.populateFrom(userList.get(position));
-            return (convertView);
-        }
-    }
-
-    //ViewHolder for CustomAdapter:
-    class ViewHolder{
-        public TextView uName = null;
-        public ImageView uImage = null;
-        public ImageView sImage = null;
-        public TextView fName = null;
-
-        ViewHolder(View row){
-            uName = (TextView)row.findViewById(R.id.userName);
-            fName = (TextView)row.findViewById(R.id.fullName);
-            uImage = (ImageView)row.findViewById(R.id.userImage);
-            sImage = (ImageView)row.findViewById(R.id.searchImage);
-
-        }
-        void populateFrom(UsersInfo r){
-            uName.setText("User Name: " + "  " + r.user_name);
-            fName.setText(r.full_name);
-            int loader = R.drawable.ic_launcher;
-            String imgUrl = r.prof_url;
-            ImageLoader imageLoader = new ImageLoader(getApplicationContext());
-            imageLoader.DisplayImage(imgUrl, loader, uImage);
-            String schURL = r.img_url;
-            ImageLoader imageLoader1 = new ImageLoader(getApplicationContext());
-            imageLoader1.DisplayImage(schURL, loader, sImage);
-        }
+    public void startResultActivity(String userN, String fullN, String profI, String searchI, String imageL){
+        //Send information to be used in Detail View
+        Intent detailView = new Intent(mContext, DetailView.class);
+        detailView.putExtra("USERNAME_KEY", userN);
+        detailView.putExtra("FULLNAME_KEY", fullN);
+        detailView.putExtra("PROFILEIMG_KEY", profI);
+        detailView.putExtra("SEARCHIMG_KEY", searchI);
+        detailView.putExtra("LINK_KEY", imageL);
+        startActivityForResult(detailView, 0);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
