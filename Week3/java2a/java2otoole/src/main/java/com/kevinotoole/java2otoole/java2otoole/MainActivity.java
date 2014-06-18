@@ -25,27 +25,15 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.os.Handler;
 
-import com.kevinotoole.java2otoole.java2otoole.imageLoader.ImageLoader;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements MainActivityFragment.onListItemClicked{
 
     // Check connection:
     public boolean connected = false;
@@ -55,30 +43,23 @@ public class MainActivity extends Activity {
     private static FileManager fileManager;
     public static String fileName = "JSONData.txt";
     public static ListView listView;
-    Button searchButton;
-    public static String url; // "https://api.instagram.com/v1/tags/USMC/media/recent?access_token=188207900.f59def8.726418d4d14945898ae397a2eca002de";
+    public static String url = "https://api.instagram.com/v1/tags/USMC/media/recent?access_token=188207900.f59def8.726418d4d14945898ae397a2eca002de";
     String detail_userName, detail_searchImage;
     Float detail_rating;
 
+    static MainActivityFragment fragment;
 
     ArrayList<UserInfo> userList = new ArrayList<UserInfo>();
 
-    private static final String TAG_DT = "data";
-    private static final String TAG_UN = "username";
-    private static final String TAG_PI = "profile_picture";
-    private static final String TAG_FN = "full_name";
-    private static final String TAG_UI = "url";
-    private static final String TAG_LI = "link";
-
-    JSONArray users = null;
     CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_fragment);
 
+        fragment = (MainActivityFragment)getFragmentManager().findFragmentById(R.id.mainFragment);
         listView = (ListView)findViewById(R.id.listView);
 
         //Set instance of FileManger:
@@ -94,6 +75,7 @@ public class MainActivity extends Activity {
                 listView.setAdapter(customAdapter);
             }
             else{
+
                 Log.d("MAIN", "Saved = null");
             }
         }
@@ -101,37 +83,25 @@ public class MainActivity extends Activity {
             Log.d("MAIN", "no Saved instance");
         }
 
-        //Get Search Button by ID:
-        searchButton = (Button) findViewById(R.id.searchBtn);
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Check for connection:
-                connected = Connectivity.getNetworkStatus(mContext);
-                if (!connected){
-                    //Alert if not connected:
-                    AlertDialog.Builder noConnection = new AlertDialog.Builder(mContext);
-                    noConnection.setMessage(getString(R.string.noConnection))
-                            .setCancelable(false)
-                            .setPositiveButton(getString(R.string.okBtn), new DialogInterface.OnClickListener() {
+        connected = Connectivity.getNetworkStatus(mContext);
+        if (!connected){
+            //Alert if not connected:
+            AlertDialog.Builder noConnection = new AlertDialog.Builder(mContext);
+            noConnection.setMessage(getString(R.string.noConnection))
+                    .setCancelable(false)
+                    .setPositiveButton(getString(R.string.okBtn), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.cancel();
                         }
                     });
-                    AlertDialog alertDialog = noConnection.create();
-                    alertDialog.show();
-                }
-                else{
-                    //Toast.makeText(this, "You are connected to " + Connectivity.getConnectionType(this), Toast.LENGTH_LONG).show();
-                    //Do something!!!!!!
-                    userList.clear();
-                    url = "https://api.instagram.com/v1/tags/usmc/media/recent?access_token=188207900.f59def8.726418d4d14945898ae397a2eca002de";
-                    getData();
-                }
-            }
-        });
-
+            AlertDialog alertDialog = noConnection.create();
+            alertDialog.show();
+        }
+        else{
+            //getData();
+            return;
+        }
     }
 
     public void getData(){
@@ -162,56 +132,11 @@ public class MainActivity extends Activity {
                 Object returnedObject = msg.obj;
                 if (msg.arg1 == RESULT_OK && returnedObject != null){
                     Log.i("HANDLER MESSAGE", "handleMessage()");
-                    activity.displayDataFromFile();
+                    fragment.getFragmentData();
                 }else{
                     Log.i("HANDLER MESSAGE", "Data not created");
                 }
             }
-        }
-    }
-
-    //Parse JSON Data to display in ListView
-    public  void displayDataFromFile(){
-        //Pull json from DDMS
-        fileManager = FileManager.getInstance();
-
-        String JSONString = fileManager.readStringFromFile(mContext, fileName);
-
-
-        try {
-            JSONObject jsonObject = new JSONObject(JSONString);
-            users = jsonObject.getJSONArray(TAG_DT);
-            for (int i = 0; i < users.length(); i++){
-                JSONObject c = users.getJSONObject(i);
-                UserInfo results = new UserInfo();
-                results.user_name = c.getJSONObject("user").getString(TAG_UN);
-                results.full_name = c.getJSONObject("user").getString(TAG_FN);
-                results.prof_url = c.getJSONObject("user").getString(TAG_PI);
-                results.img_url = c.getJSONObject("images").getJSONObject("standard_resolution").getString(TAG_UI);
-                results.img_link = c.getString(TAG_LI);
-                userList.add(results);
-            }
-
-            //Custom Adapter:
-            customAdapter = new CustomAdapter(this, R.layout.list_row, userList);
-            listView.setAdapter(customAdapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                String username, fullname, profimage, searchimage, imagelink;
-
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int position, long row) {
-                    username = userList.get(position).user_name;
-                    fullname = userList.get(position).full_name;
-                    profimage = userList.get(position).prof_url;
-                    searchimage = userList.get(position).img_url;
-                    imagelink = userList.get(position).img_link;
-
-                    startResultActivity(username, fullname, profimage, searchimage, imagelink);
-                }
-            });
-
-        }catch (JSONException e){
-            e.printStackTrace();
         }
     }
 

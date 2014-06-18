@@ -4,10 +4,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.kevinotoole.java2otoole.java2otoole.MainActivityFragment"
-        android:id="@+id/mainactivityfragment"
+        android:id="@+id/mainFragment"
         android:layout_gravity="center_horizontal" />
+
 </LinearLayout>
