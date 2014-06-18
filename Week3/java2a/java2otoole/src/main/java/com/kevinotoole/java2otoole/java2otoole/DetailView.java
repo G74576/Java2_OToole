@@ -32,9 +32,7 @@ public class DetailView extends Activity {
     public String profImg;
     public String searchImg;
     public String imgLink;
-    ImageView profileImage, searchImage;
-    TextView user_name, full_name;
-    Button searchBtn;
+
     RatingBar ratingBar;
     Float ratingSelected;
 
@@ -42,15 +40,7 @@ public class DetailView extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.details_view);
-
-        searchBtn = (Button) findViewById(R.id.button);
-
-        //Set TextViews & ImageViews:
-        user_name = (TextView) findViewById(R.id.detailUN);
-        full_name = (TextView) findViewById(R.id.detailFN);
-        profileImage = (ImageView) findViewById(R.id.detailPI);
-        searchImage = (ImageView) findViewById(R.id.detailSI);
+        setContentView(R.layout.details_view_fragment);
 
         //Retrieve data from Main Activity:
         Intent intent = this.getIntent();
@@ -60,40 +50,21 @@ public class DetailView extends Activity {
         searchImg = intent.getStringExtra("SEARCHIMG_KEY");
         imgLink = intent.getStringExtra("LINK_KEY");
 
+        DetailActivityFragment fragment = (DetailActivityFragment) getFragmentManager().findFragmentById(R.id.detailFragment);
         //Display results from intent:
-        displayResult(userName, fullName, profImg, searchImg, imgLink);
+        fragment.displayResult(userName, fullName, profImg, searchImg, imgLink);
 
-        //Get the rating for the image via the rating bar:
-        ratingBar = (RatingBar) findViewById(R.id.ratingbar);
+        ratingBar = (RatingBar)findViewById(R.id.ratingbar);
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean user) {
                 ratingSelected = ratingBar.getRating();
             }
         });
+
+
     }
 
-    public void displayResult(String userN, String fullN, String profI, String searchI, final String imageL){
-        //Set the TextViews & ImageVies with retrieved data:
-        user_name.setText(userN);
-        full_name.setText(fullN);
-        int loader = R.drawable.ic_launcher;
-        String profImgUrl = profI;
-        ImageLoader imageLoader = new ImageLoader(getApplicationContext());
-        imageLoader.DisplayImage(profImgUrl, loader, profileImage);
-        String searchImgUrl = searchI;
-        ImageLoader imageLoader1 = new ImageLoader(getApplicationContext());
-        imageLoader1.DisplayImage(searchImgUrl, loader, searchImage);
-
-        //Set implicit intent to view image in Instagram:
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent searchLink = new Intent(Intent.ACTION_VIEW, Uri.parse(imageL));
-                startActivity(searchLink);
-            }
-        });
-    }
 
     @Override
     public void finish() {

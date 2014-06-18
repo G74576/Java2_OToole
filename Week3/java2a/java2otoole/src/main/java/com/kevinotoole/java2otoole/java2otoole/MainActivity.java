@@ -99,7 +99,6 @@ public class MainActivity extends Activity implements MainActivityFragment.onLis
             alertDialog.show();
         }
         else{
-            //getData();
             return;
         }
     }

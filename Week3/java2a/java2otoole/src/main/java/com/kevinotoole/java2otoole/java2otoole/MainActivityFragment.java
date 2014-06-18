@@ -33,16 +33,12 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     JSONArray users = null;
     CustomAdapter customAdapter;
 
-    MainActivity mainActivity;
-
     private static final String TAG_DT = "data";
     private static final String TAG_UN = "username";
     private static final String TAG_PI = "profile_picture";
     private static final String TAG_FN = "full_name";
     private static final String TAG_UI = "url";
     private static final String TAG_LI = "link";
-
-    Context context;
 
     private onListItemClicked parentActivity;
 
