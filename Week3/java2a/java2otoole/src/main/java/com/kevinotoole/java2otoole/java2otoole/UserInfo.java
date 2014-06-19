@@ -12,18 +12,20 @@ public class UserInfo implements Serializable {
     public String prof_url;
     public String img_url;
     public String img_link;
+    public String like_count;
 
     public UserInfo() {
 
     }
 
-    public UserInfo(String user_Name, String full_Name, String prof_Url, String img_Url, String img_Link){
+    public UserInfo(String user_Name, String full_Name, String prof_Url, String img_Url, String img_Link, String like_count){
         super();
         this.user_name = user_Name;
         this.full_name = full_Name;
         this.prof_url = prof_Url;
         this.img_url = img_Url;
         this.img_link = img_Link;
+        this.like_count = like_count;
     }
 
     public String getUser_name(){
@@ -64,5 +66,13 @@ public class UserInfo implements Serializable {
 
     public void setImg_link(String img_link){
         this.img_link = img_link;
+    }
+
+    public String getLike_count(){
+        return like_count;
+    }
+
+    public void setLike_count(String like_count){
+        this.like_count = like_count;
     }
 }

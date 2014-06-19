@@ -33,14 +33,14 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 
-public class MainActivity extends Activity implements MainActivityFragment.onListItemClicked{
+public class MainActivity extends Activity implements MainActivityFragment.OnListItemClicked{
 
     // Check connection:
     public boolean connected = false;
 
     //Global Variables:
     public static Context mContext;
-    private static FileManager fileManager;
+    FileManager fileManager;
     public static String fileName = "JSONData.txt";
     public static ListView listView;
     public static String url = "https://api.instagram.com/v1/tags/USMC/media/recent?access_token=188207900.f59def8.726418d4d14945898ae397a2eca002de";
@@ -60,13 +60,14 @@ public class MainActivity extends Activity implements MainActivityFragment.onLis
         setContentView(R.layout.activity_main_fragment);
 
         fragment = (MainActivityFragment)getFragmentManager().findFragmentById(R.id.mainFragment);
+
         listView = (ListView)findViewById(R.id.listView);
 
         //Set instance of FileManger:
         fileManager = FileManager.getInstance();
 
         //Check whether we are recreating a previously destroyed instance:
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             Log.d("MAIN", "Saved instance");
 
             userList = (ArrayList<UserInfo>)savedInstanceState.getSerializable("saved");
@@ -99,9 +100,10 @@ public class MainActivity extends Activity implements MainActivityFragment.onLis
             alertDialog.show();
         }
         else{
-            return;
+
         }
     }
+
 
     public void getData(){
         final MyHandler myHandler = new MyHandler(this);
@@ -139,7 +141,7 @@ public class MainActivity extends Activity implements MainActivityFragment.onLis
         }
     }
 
-    public void startResultActivity(String userN, String fullN, String profI, String searchI, String imageL){
+    public void startResultActivity(String userN, String fullN, String profI, String searchI, String imageL, String likeC){
         //Send information to be used in Detail View
         Intent detailView = new Intent(mContext, DetailView.class);
         detailView.putExtra("USERNAME_KEY", userN);
@@ -147,7 +149,24 @@ public class MainActivity extends Activity implements MainActivityFragment.onLis
         detailView.putExtra("PROFILEIMG_KEY", profI);
         detailView.putExtra("SEARCHIMG_KEY", searchI);
         detailView.putExtra("LINK_KEY", imageL);
+        detailView.putExtra("LIKE_KEY", likeC);
         startActivityForResult(detailView, 0);
+    }
+
+    @Override
+    public void onListItemClicked(String un, String fn, String pi, String si, String il, String lc) {
+
+        DetailActivityFragment detailActivityFragmentfragment = (DetailActivityFragment) getFragmentManager().findFragmentById(R.id.detailFragment);
+
+        if (detailActivityFragmentfragment != null && detailActivityFragmentfragment.isInLayout()){
+            //Display results from intent:
+            detailActivityFragmentfragment.displayResult(un, fn, pi, si, il, lc);
+        }
+        else {
+            startResultActivity(un, fn, pi, si, il, lc);
+        }
+
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -185,11 +204,12 @@ public class MainActivity extends Activity implements MainActivityFragment.onLis
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (userList != null && !userList.isEmpty()){
+        if (userList != null && userList.isEmpty()){
             outState.putSerializable("saved", userList);
             Log.i("MAIN", "Saving instance state data");
         }
+        super.onSaveInstanceState(outState);
+
     }
 
     @Override

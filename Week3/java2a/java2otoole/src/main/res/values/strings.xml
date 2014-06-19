@@ -34,6 +34,7 @@
     <!-- Button String -->
     <string name="detailbtn">View image in Instagram</string>
     <string name="rate">Rate this image!</string>
+    <string name="likes">Likes:</string>
 
     <!-- Image Views Content Descriptions -->
     <string name="contPI">User Profile Image</string>

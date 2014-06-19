@@ -15,22 +15,36 @@ import android.widget.TextView;
 
 import com.kevinotoole.java2otoole.java2otoole.imageLoader.ImageLoader;
 
+import org.w3c.dom.Text;
+
 /**
- * Created by kevinotoole on 6/18/14.
+ * Author: Kevin OToole
+ * Java 2 Term 1406
+ * Week 3 Project
+ * Project: USMC Instagram Photos
+ * Package: com.kevinotoole.java2otoole.java2otoole;
+ * File: DetailViewFragment.java
+ * Purpose:
  */
-public class DetailActivityFragment extends Fragment implements View.OnClickListener {
+
+public class DetailActivityFragment extends Fragment implements View.OnClickListener/*, RatingBar.OnRatingBarChangeListener*/ {
 
     ImageView profileImage, searchImage;
-    TextView user_name, full_name;
+    TextView user_name, full_name, likes_count;
     Button searchBtn;
-    String imageLink;
+    String imageLink, likeCount;
     RatingBar ratingBar;
-
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.setRetainInstance(true);
     }
 
     @Override
@@ -46,25 +60,28 @@ public class DetailActivityFragment extends Fragment implements View.OnClickList
         full_name = (TextView) view.findViewById(R.id.detailFN);
         profileImage = (ImageView) view.findViewById(R.id.detailPI);
         searchImage = (ImageView) view.findViewById(R.id.detailSI);
+        likes_count = (TextView) view.findViewById(R.id.likescount);
 
         //Set RatingBar:
         ratingBar = (RatingBar) view.findViewById(R.id.ratingbar);
+        //ratingBar.setOnRatingBarChangeListener(this);
 
         return view;
     }
 
-    public void displayResult(String userN, String fullN, String profI, String searchI, final String imageL){
+    public void displayResult(String userN, String fullN, String profI, String searchI, final String imageL, String likeC){
         //Set the TextViews & ImageVies with retrieved data:
         user_name.setText(userN);
         full_name.setText(fullN);
         int loader = R.drawable.ic_launcher;
-        String profImgUrl = profI;
+        //String profImgUrl = profI;
         ImageLoader imageLoader = new ImageLoader(getActivity());
-        imageLoader.DisplayImage(profImgUrl, loader, profileImage);
-        String searchImgUrl = searchI;
+        imageLoader.DisplayImage(profI, loader, profileImage);
+        //String searchImgUrl = searchI;
         ImageLoader imageLoader1 = new ImageLoader(getActivity());
-        imageLoader1.DisplayImage(searchImgUrl, loader, searchImage);
+        imageLoader1.DisplayImage(searchI, loader, searchImage);
         imageLink = imageL;
+        likes_count.setText(likeC);
 
         //Set onClickListener for Search Button:
         searchBtn.setOnClickListener(this);
@@ -76,4 +93,9 @@ public class DetailActivityFragment extends Fragment implements View.OnClickList
         Intent searchLink = new Intent(Intent.ACTION_VIEW, Uri.parse(imageLink));
         startActivity(searchLink);
     }
+
+//    @Override
+//    public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+//
+//    }
 }

@@ -2,16 +2,11 @@ package com.kevinotoole.java2otoole.java2otoole;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.TextView;
 
-import com.kevinotoole.java2otoole.java2otoole.imageLoader.ImageLoader;
 
 /**
  * Author: Kevin OToole
@@ -32,6 +27,7 @@ public class DetailView extends Activity {
     public String profImg;
     public String searchImg;
     public String imgLink;
+    public String likeCount;
 
     RatingBar ratingBar;
     Float ratingSelected;
@@ -40,29 +36,44 @@ public class DetailView extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.details_view_fragment);
 
-        //Retrieve data from Main Activity:
-        Intent intent = this.getIntent();
-        userName = intent.getStringExtra("USERNAME_KEY");
-        fullName = intent.getStringExtra("FULLNAME_KEY");
-        profImg = intent.getStringExtra("PROFILEIMG_KEY");
-        searchImg = intent.getStringExtra("SEARCHIMG_KEY");
-        imgLink = intent.getStringExtra("LINK_KEY");
+        if (savedInstanceState != null) {
 
-        DetailActivityFragment fragment = (DetailActivityFragment) getFragmentManager().findFragmentById(R.id.detailFragment);
-        //Display results from intent:
-        fragment.displayResult(userName, fullName, profImg, searchImg, imgLink);
-
-        ratingBar = (RatingBar)findViewById(R.id.ratingbar);
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean user) {
-                ratingSelected = ratingBar.getRating();
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                finish();
             }
-        });
 
+        }
+        else {
 
+            //Retrieve data from Main Activity:
+            Intent intent = this.getIntent();
+            userName = intent.getStringExtra("USERNAME_KEY");
+            fullName = intent.getStringExtra("FULLNAME_KEY");
+            profImg = intent.getStringExtra("PROFILEIMG_KEY");
+            searchImg = intent.getStringExtra("SEARCHIMG_KEY");
+            imgLink = intent.getStringExtra("LINK_KEY");
+            likeCount = intent.getStringExtra("LIKE_KEY");
+
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                finish();
+            }
+            else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+                DetailActivityFragment fragment = (DetailActivityFragment) getFragmentManager().findFragmentById(R.id.detailFragment);
+                //Display results from intent:
+                fragment.displayResult(userName, fullName, profImg, searchImg, imgLink, likeCount);
+
+                ratingBar = (RatingBar) findViewById(R.id.ratingbar);
+                ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean user) {
+                        ratingSelected = ratingBar.getRating();
+                    }
+                });
+            }
+        }
     }
 
 

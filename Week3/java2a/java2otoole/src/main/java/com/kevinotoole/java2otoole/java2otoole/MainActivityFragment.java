@@ -2,7 +2,6 @@ package com.kevinotoole.java2otoole.java2otoole;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +17,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * Created by kevinotoole on 6/17/14.
+ * Author: Kevin OToole
+ * Java 2 Term 1406
+ * Week 3 Project
+ * Project: USMC Instagram Photos
+ * Package: com.kevinotoole.java2otoole.java2otoole;
+ * File: MainActivityFragment.java
+ * Purpose:
  */
+
 public class MainActivityFragment extends Fragment implements View.OnClickListener {
 
-    private static FileManager fileManager;
     public static String fileName = "JSONData.txt";
     public static ListView listView;
     Button searchButton;
@@ -31,6 +36,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     ArrayList<UserInfo> userList = new ArrayList<UserInfo>();
 
     JSONArray users = null;
+    JSONObject c = null;
     CustomAdapter customAdapter;
 
     private static final String TAG_DT = "data";
@@ -39,26 +45,33 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     private static final String TAG_FN = "full_name";
     private static final String TAG_UI = "url";
     private static final String TAG_LI = "link";
+    private static final String TAG_CT = "count";
 
-    private onListItemClicked parentActivity;
+    private OnListItemClicked parentActivity;
 
 
-    public interface onListItemClicked{
-        void startResultActivity(String un, String fn, String pi, String si, String il);
+    public interface OnListItemClicked{
+        void onListItemClicked(String un, String fn, String pi, String si, String il, String lc);
         void getData();
-        ArrayList<UserInfo> userList = new ArrayList<UserInfo>();
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        if (activity instanceof onListItemClicked){
-            parentActivity = (onListItemClicked) activity;
+        if (activity instanceof OnListItemClicked){
+            parentActivity = (OnListItemClicked) activity;
         }
         else {
             throw new ClassCastException(activity.toString() + " must implement onListItemClicked");
         }
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.setRetainInstance(true);
     }
 
     @Override
@@ -69,7 +82,6 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         listView = (ListView)view.findViewById(R.id.listView);
         searchButton = (Button)view.findViewById(R.id.searchBtn);
         searchButton.setOnClickListener(this);
-
 
         return view;
     }
@@ -85,7 +97,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     //Parse JSON Data to display in ListView
     public  void displayDataFromFile(){
         //Pull json from DDMS
-        fileManager = FileManager.getInstance();
+        FileManager fileManager = FileManager.getInstance();
 
         String JSONString = fileManager.readStringFromFile(getActivity(), fileName);
 
@@ -94,13 +106,14 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
             JSONObject jsonObject = new JSONObject(JSONString);
             users = jsonObject.getJSONArray(TAG_DT);
             for (int i = 0; i < users.length(); i++){
-                JSONObject c = users.getJSONObject(i);
+                c = users.getJSONObject(i);
                 UserInfo results = new UserInfo();
                 results.user_name = c.getJSONObject("user").getString(TAG_UN);
                 results.full_name = c.getJSONObject("user").getString(TAG_FN);
                 results.prof_url = c.getJSONObject("user").getString(TAG_PI);
                 results.img_url = c.getJSONObject("images").getJSONObject("standard_resolution").getString(TAG_UI);
                 results.img_link = c.getString(TAG_LI);
+                results.like_count = c.getJSONObject("likes").getString(TAG_CT);
                 userList.add(results);
             }
 
@@ -108,7 +121,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
             customAdapter = new CustomAdapter(getActivity(), R.layout.list_row, userList);
             listView.setAdapter(customAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                String username, fullname, profimage, searchimage, imagelink;
+                String username, fullname, profimage, searchimage, imagelink, likecount;
 
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long row) {
@@ -117,8 +130,9 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                     profimage = userList.get(position).prof_url;
                     searchimage = userList.get(position).img_url;
                     imagelink = userList.get(position).img_link;
+                    likecount = userList.get(position).like_count;
 
-                    parentActivity.startResultActivity(username, fullname, profimage, searchimage, imagelink);
+                    parentActivity.onListItemClicked(username, fullname, profimage, searchimage, imagelink, likecount);
                 }
             });
 

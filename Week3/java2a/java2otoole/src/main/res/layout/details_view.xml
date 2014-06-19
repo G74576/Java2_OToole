@@ -1,93 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp">
+    android:fillViewport="false"
+    android:id="@+id/scroolView">
 
-    <ImageView
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:id="@+id/detailPI"
-        android:contentDescription="@string/contPI"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:id="@+id/ega"
-        android:contentDescription="@string/egaIM"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:alpha=".50"
-        android:src="@drawable/egaimage"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
-        android:textSize="20sp"
-        android:id="@+id/detailUN"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/detailPI"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="5dp"
-        android:gravity="left" />
+        android:layout_margin="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
-        android:textSize="16sp"
-        android:id="@+id/detailFN"
-        android:layout_toRightOf="@+id/detailPI"
-        android:layout_alignParentRight="true"
-        android:gravity="center|left"
-        android:layout_marginLeft="5dp"
-        android:layout_below="@+id/detailUN" />
+        <ImageView
+            android:id="@+id/detailPI"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/contPI" />
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:scaleType="fitXY"
-        android:id="@+id/detailSI"
-        android:contentDescription="@string/contTI"
-        android:layout_below="@+id/detailPI"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp" />
+        <ImageView
+            android:id="@+id/ega"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:alpha=".50"
+            android:contentDescription="@string/egaIM"
+            android:src="@drawable/egaimage" />
 
-    <RatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ratingbar"
-        android:stepSize="0.5"
-        android:numStars="5"
-        android:layout_below="@+id/detailSI"
-        android:scaleX="0.75"
-        android:scaleY="0.75"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/detailUN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/detailPI"
+            android:gravity="left"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="20sp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/detailbtn"
-        android:id="@+id/button"
-        android:textColor="#FFFF00"
-        android:layout_below="@+id/ratingbar"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/detailFN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/detailUN"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/detailPI"
+            android:gravity="center|left"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="16sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/rate"
-        android:id="@+id/textView"
-        android:layout_above="@+id/button"
-        android:layout_centerHorizontal="true" />
+        <ImageView
+            android:id="@+id/detailSI"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_below="@+id/detailPI"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:contentDescription="@string/contTI"
+            android:scaleType="fitXY" />
 
-</RelativeLayout>
+        <RatingBar
+            android:id="@+id/ratingbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detailSI"
+            android:layout_centerHorizontal="true"
+            android:numStars="5"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
+            android:stepSize="0.5" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ratingbar"
+            android:layout_centerHorizontal="true"
+            android:text="@string/detailbtn"
+            android:textColor="#FFFF00" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button"
+            android:layout_centerHorizontal="true"
+            android:text="@string/rate"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/likes"
+            android:id="@+id/textView2"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:layout_alignEnd="@+id/detailSI"
+            android:layout_above="@+id/likescount"
+            android:layout_alignRight="@+id/detailSI" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/likescount"
+            android:textColor="#FFFFFF"
+            android:gravity="right"
+            android:layout_alignBottom="@+id/ega"
+            android:layout_alignRight="@+id/detailSI"
+            android:layout_alignEnd="@+id/detailSI" />
+
+    </RelativeLayout>
+</ScrollView>
