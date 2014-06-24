@@ -2,6 +2,7 @@ package com.kevinotoole.java2otoole.java2otoole;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Author: Kevin OToole
  * Java 2 Term 1406
- * Week 3 Project
+ * Week 4 Project
  * Project: USMC Instagram Photos
  * Package: com.kevinotoole.java2otoole.java2otoole;
  * File: MainActivityFragment.java
@@ -53,6 +54,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     public interface OnListItemClicked{
         void onListItemClicked(String un, String fn, String pi, String si, String il, String lc);
         void getData();
+
     }
 
     @Override

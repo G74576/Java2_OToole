@@ -2,7 +2,7 @@ package com.kevinotoole.java2otoole.java2otoole;
 /**
  * Author: Kevin OToole
  * Java 2 Term 1406
- * Week 3 Project
+ * Week 4 Project
  * Project: USMC Instagram Photos
  * Package: com.kevinotoole.java2otoole.java2otoole;
  * File: MainActivity.java
@@ -204,7 +204,7 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        if (userList != null && userList.isEmpty()){
+        if (userList != null && !userList.isEmpty()){
             outState.putSerializable("saved", userList);
             Log.i("MAIN", "Saving instance state data");
         }

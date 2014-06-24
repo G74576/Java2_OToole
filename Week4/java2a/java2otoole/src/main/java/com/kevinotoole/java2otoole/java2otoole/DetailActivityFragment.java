@@ -20,7 +20,7 @@ import org.w3c.dom.Text;
 /**
  * Author: Kevin OToole
  * Java 2 Term 1406
- * Week 3 Project
+ * Week 4 Project
  * Project: USMC Instagram Photos
  * Package: com.kevinotoole.java2otoole.java2otoole;
  * File: DetailViewFragment.java

@@ -2,8 +2,12 @@
 <resources>
 
     <string name="app_name">USMC Photos</string>
-    <string name="hello_world">Hello world!</string>
+    <!-- Action Bar Strings -->
     <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="action_preferences">Preferences</string>
+    <string name="action_favorites">Favorites</string>
+    <string name="action_info">Info</string>
 
     <!-- Connectivity Class String -->
     <!-- LOG String -->

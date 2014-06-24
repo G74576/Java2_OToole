@@ -3,7 +3,7 @@ package com.kevinotoole.java2otoole.java2otoole.imageLoader;
 /**
  * Kevin OToole
  * Java 2 Term 1406
- * Week 3 Project
+ * Week 4 Project
  */
 import java.io.InputStream;
 import java.io.OutputStream;

@@ -1,9 +1,9 @@
 package com.kevinotoole.java2otoole.java2otoole.imageLoader;
 
 /**
- * Kevin OToole
+ * Kevin O'Toole
  * Java 2 Term 1406
- * Week 3 Project
+ * Week 4 Project
  */
 
 import android.graphics.Bitmap;
