@@ -15,9 +15,9 @@ import java.util.ArrayList;
 /**
  * Created by kevinotoole on 6/16/14.
  */
-public class CustomAdapter extends ArrayAdapter<UserInfo> {
+public class CustomAdapter extends ArrayAdapter<UserInfo>{
 
-    private ArrayList<UserInfo> userList;
+    public ArrayList<UserInfo> userList;
 
     public CustomAdapter(Context context, int resource, ArrayList<UserInfo> userList) {
         super(context, resource, userList);
@@ -30,6 +30,7 @@ public class CustomAdapter extends ArrayAdapter<UserInfo> {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.list_row, null);
         }
+
 
         UserInfo items = userList.get(position);
         if (items != null) {
@@ -46,7 +47,7 @@ public class CustomAdapter extends ArrayAdapter<UserInfo> {
             imageLoader.DisplayImage(imgUrl, loader, uImage);
             String schUrl = items.img_url;
             ImageLoader imageLoader1 = new ImageLoader(getContext());
-            imageLoader.DisplayImage(schUrl, loader, sImage);
+            imageLoader1.DisplayImage(schUrl, loader, sImage);
         }
         return view;
     }

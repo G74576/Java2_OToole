@@ -17,9 +17,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.Messenger;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,9 +32,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.os.Handler;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-
 
 public class MainActivity extends Activity implements MainActivityFragment.OnListItemClicked{
 
@@ -46,12 +54,14 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
     public static String url = "https://api.instagram.com/v1/tags/USMC/media/recent?access_token=188207900.f59def8.726418d4d14945898ae397a2eca002de";
     String detail_userName, detail_searchImage;
     Float detail_rating;
+    public static String ratingForFile;
+    public static ArrayList<String> ratingArray = new ArrayList<String>();
 
     static MainActivityFragment fragment;
 
     ArrayList<UserInfo> userList = new ArrayList<UserInfo>();
 
-    CustomAdapter customAdapter;
+    public CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +75,18 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 
         //Set instance of FileManger:
         fileManager = FileManager.getInstance();
+
+        //If there is a username in the SharedPreferences:
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        String prefUN = preferences.getString("USERNAME", null);
+        TextView loggedUser = (TextView)findViewById(R.id.preferencesName);
+        if (prefUN != null){
+            loggedUser.setText("Welcome " + prefUN);
+            loggedUser.setVisibility(View.VISIBLE);
+        }
+        else {
+            loggedUser.setVisibility(View.GONE);
+        }
 
         //Check whether we are recreating a previously destroyed instance:
         if (savedInstanceState != null) {
@@ -178,6 +200,28 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
                 detail_searchImage = data.getExtras().getString("detailsSearchImage");
                 detail_rating = data.getExtras().getFloat("detailRating");
 
+                ratingForFile = ("Username: " + detail_userName + " Rating: " + detail_rating.toString());
+                ratingArray.add(ratingForFile);
+
+//                File rateFile = new File(ratingFileName);
+//                if (rateFile.exists()==false){
+//                    //rateFile.createNewFile();
+//                    fileManager.WriteFileToString(mContext, ratingFileName, ratingForFile);
+//                    //rateFile.createNewFile();
+//                }else {
+//                    fileManager.WriteToFileString(mContext, ratingFileName, ratingFileName, true);
+//                }
+////                    FileWriter fileWriter = new FileWriter(ratingFileName,true);
+////                    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+////                    bufferedWriter.write(ratingForFile + "\n");
+////                    bufferedWriter.newLine();
+////                    bufferedWriter.close();
+////                    PrintWriter out = new PrintWriter(rateFile);
+////                    out.append(ratingForFile + "\n");
+////                    out.close();
+//                //                fileManager.WriteFileToString(mContext, ratingFileName, ratingForFile);
+
+
                 //Alert of rating of image from detail view:
                 AlertDialog.Builder ratingAlert = new AlertDialog.Builder(mContext);
                 LayoutInflater inflater = getLayoutInflater();
@@ -220,6 +264,21 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
             Log.i("MAIN", "Restoring instance state data");
     }
 
+    public void launchPrefDialog(AlertDialogFragment.DialogType type){
+        AlertDialogFragment dialogFragment = AlertDialogFragment.newInstance(type);
+        dialogFragment.show(getFragmentManager(), "PREFERENCES");
+    }
+
+    public void launchSearchDialog(AlertDialogFragment.DialogType type){
+        AlertDialogFragment dialogFragment = AlertDialogFragment.newInstance(type);
+        dialogFragment.show(getFragmentManager(), "SEARCH");
+    }
+
+    public void launchFavoritesDialog(AlertDialogFragment.DialogType type){
+        AlertDialogFragment dialogFragment = AlertDialogFragment.newInstance(type);
+        dialogFragment.show(getFragmentManager(), "FAVORITES");
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -232,10 +291,24 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()){
+            case R.id.search_menu_item:
+                launchSearchDialog(AlertDialogFragment.DialogType.SEARCH);
+                break;
+
+            case R.id.info_menu_item:
+
+                break;
+
+            case R.id.favorites_menu_item:
+                launchFavoritesDialog(AlertDialogFragment.DialogType.FAVORITES);
+                break;
+
+            case R.id.preferences_menu_item:
+                launchPrefDialog(AlertDialogFragment.DialogType.PREFERENCES);
+                break;
+
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 }

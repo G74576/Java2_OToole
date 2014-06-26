@@ -50,4 +50,13 @@
     <string name="lrContPI">User Profile Image</string>
     <string name="lrContTI">USMC Tagged Image</string>
 
+    <!-- Action Bar Alert Dialog Strings -->
+    <string name="searchHint">Enter search word here...</string>
+    <string name="searchHead">Search USMC Instagram Photos</string>
+    <string name="searchMess">Search through USMC Instragm photos by the users name. </string>
+    <string name="prefHint">Enter user name...</string>
+    <string name="prefHead">Preferences</string>
+    <string name="prefMess">Please enter your username to load preferences.</string>
+    <string name="favHead">Favorite Ratings</string>
+
 </resources>

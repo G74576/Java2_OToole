@@ -2,24 +2,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.kevinotoole.java2otoole.java2otoole.MainActivity" >
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
 
     <item android:id="@+id/search_menu_item"
         android:icon="@drawable/ic_action_search"
         android:title="@string/action_search"
-        app:showAsAction="ifRoom" />
+        app:actionViewClass="android.widget.SearchView"
+        android:showAsAction="ifRoom" />
 
     <item android:id="@+id/info_menu_item"
         android:icon="@drawable/ic_action_about"
         android:title="@string/action_info"
-        app:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom" />
+
+    <item android:id="@+id/favorites_menu_item"
+        android:icon="@drawable/ic_action_important"
+        android:title="@string/action_favorites"
+        android:showAsAction="ifRoom" />
 
     <item android:id="@+id/preferences_menu_item"
         android:icon="@drawable/ic_action_settings"
         android:title="@string/action_preferences"
-        app:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom" />
 
 </menu>

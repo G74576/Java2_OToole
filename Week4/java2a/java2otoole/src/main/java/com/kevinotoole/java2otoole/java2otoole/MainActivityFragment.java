@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ import java.util.ArrayList;
 public class MainActivityFragment extends Fragment implements View.OnClickListener {
 
     public static String fileName = "JSONData.txt";
+//    public static String ratingFileName = "RATING.txt";
+//    public static String userRatingString;
     public static ListView listView;
     Button searchButton;
     public static String url; // "https://api.instagram.com/v1/tags/USMC/media/recent?access_token=188207900.f59def8.726418d4d14945898ae397a2eca002de";
@@ -142,6 +145,13 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
             e.printStackTrace();
         }
     }
+
+//    public void displayRatingFromFile(){
+//        FileManager fileManager = FileManager.getInstance();
+//
+//        userRatingString = fileManager.readStringFromFile(getActivity(), ratingFileName);
+//        Log.i("FILE", userRatingString);
+//    }
 
     public void getFragmentData(){
         displayDataFromFile();
