@@ -297,7 +297,8 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
                 break;
 
             case R.id.info_menu_item:
-
+                Intent infoIntent = new Intent(mContext, InfoActivity.class);
+                mContext.startActivity(infoIntent);
                 break;
 
             case R.id.favorites_menu_item:

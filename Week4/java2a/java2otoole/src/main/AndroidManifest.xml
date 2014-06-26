@@ -19,6 +19,9 @@
         <activity android:name="com.kevinotoole.java2otoole.java2otoole.DetailView">
 
         </activity>
+        <activity android:name="com.kevinotoole.java2otoole.java2otoole.InfoActivity">
+
+        </activity>
         <service android:name="MyService"></service>
     </application>
 

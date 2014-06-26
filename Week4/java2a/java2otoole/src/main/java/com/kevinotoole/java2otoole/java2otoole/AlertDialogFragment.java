@@ -31,9 +31,6 @@ public class AlertDialogFragment extends DialogFragment {
     public enum  DialogType {SEARCH, INFO, FAVORITES, PREFERENCES};
 
     public static DialogType type;
-    public static String userRatingFile = "RATING.txt";
-
-    public CustomAdapter adapter = (CustomAdapter) MainActivityFragment.listView.getAdapter();
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -109,6 +106,9 @@ public class AlertDialogFragment extends DialogFragment {
                             Intent refresh = new Intent(MainActivity.mContext, MainActivity.class);
                             getActivity().finish();
                             startActivity(refresh);
+
+                            //Clear the Favorites for new user:
+                            MainActivity.ratingArray.clear();
 
                         }
                     })
