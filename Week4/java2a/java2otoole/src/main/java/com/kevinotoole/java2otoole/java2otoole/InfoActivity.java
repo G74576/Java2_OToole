@@ -18,11 +18,13 @@ public class InfoActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.infoview);
 
+        //Set close button
         closeBtn = (Button)findViewById(R.id.infoCloseBtn);
         closeBtn.setOnClickListener(this);
 
     }
 
+    //Returns to MainActivity
     @Override
     public void onClick(View view) {
         finish();

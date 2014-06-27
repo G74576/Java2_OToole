@@ -18,10 +18,13 @@ import java.util.ArrayList;
 public class CustomAdapter extends ArrayAdapter<UserInfo>{
 
     public ArrayList<UserInfo> userList;
+    public ArrayList<UserInfo> newlist;
 
     public CustomAdapter(Context context, int resource, ArrayList<UserInfo> userList) {
         super(context, resource, userList);
         this.userList = userList;
+        this.newlist = new ArrayList<UserInfo>();
+        this.newlist.addAll(userList);
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -50,6 +53,27 @@ public class CustomAdapter extends ArrayAdapter<UserInfo>{
             imageLoader1.DisplayImage(schUrl, loader, sImage);
         }
         return view;
+    }
+
+    public void search(String searchString){
+        searchString = searchString.toLowerCase();
+
+        userList.clear();
+
+        if (searchString.length() == 0){
+            userList.addAll(newlist);
+        }
+        else {
+            for (UserInfo userInfo : newlist){
+                if (userInfo.getFull_name().toLowerCase().contains(searchString)){
+                    userList.add(userInfo);
+                }
+            }
+        }
+        if (userList.isEmpty()){
+            userList.addAll(newlist);
+        }
+        notifyDataSetChanged();
     }
 }
 

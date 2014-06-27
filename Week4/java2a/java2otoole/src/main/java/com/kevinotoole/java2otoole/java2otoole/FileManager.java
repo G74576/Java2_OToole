@@ -105,34 +105,6 @@ public class FileManager {
                 }
             }
         }
-//        if (ratingData.exists()){
-//            try {
-//                fis = context.openFileInput(filename);
-//                BufferedInputStream bis = new BufferedInputStream(fis);
-//                byte[] contentBytes = new byte[1024];
-//                int bytesRead = 0;
-//                StringBuffer contentBuffer = new StringBuffer();
-//
-//                while ((bytesRead = bis.read(contentBytes)) != -1) {
-//                    content = new String(contentBytes, 0, bytesRead);
-//                    contentBuffer.append(content);
-//                }
-//                content = contentBuffer.toString();
-//
-//            } catch (Exception e) {
-//                Log.e("READ FILE ERROR", "Error reading file");
-//                e.printStackTrace();
-//                return content;
-//            } finally {
-//                try {
-//                    fis.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                    Log.e("READ FILE ERROR", "Error closing input stream");
-//                }
-//            }
-//        }
-
         return content;
     }
 }

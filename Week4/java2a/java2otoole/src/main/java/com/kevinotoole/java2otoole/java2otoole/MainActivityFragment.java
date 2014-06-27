@@ -41,7 +41,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
 
     JSONArray users = null;
     JSONObject c = null;
-    CustomAdapter customAdapter;
+    public static CustomAdapter customAdapter;
 
     private static final String TAG_DT = "data";
     private static final String TAG_UN = "username";
@@ -145,13 +145,6 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
             e.printStackTrace();
         }
     }
-
-//    public void displayRatingFromFile(){
-//        FileManager fileManager = FileManager.getInstance();
-//
-//        userRatingString = fileManager.readStringFromFile(getActivity(), ratingFileName);
-//        Log.i("FILE", userRatingString);
-//    }
 
     public void getFragmentData(){
         displayDataFromFile();

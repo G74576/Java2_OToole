@@ -14,6 +14,8 @@ package com.kevinotoole.java2otoole.java2otoole;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,12 +25,14 @@ import android.os.Message;
 import android.os.Messenger;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.os.Handler;
 
@@ -61,7 +65,7 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 
     ArrayList<UserInfo> userList = new ArrayList<UserInfo>();
 
-    public CustomAdapter customAdapter;
+    public static CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,8 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 
         //Set instance of FileManger:
         fileManager = FileManager.getInstance();
+
+        File file = this.getFileStreamPath(fileName);
 
         //If there is a username in the SharedPreferences:
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
@@ -91,12 +97,15 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
         //Check whether we are recreating a previously destroyed instance:
         if (savedInstanceState != null) {
             Log.d("MAIN", "Saved instance");
-
-            userList = (ArrayList<UserInfo>)savedInstanceState.getSerializable("saved");
-            if (userList != null){
-                customAdapter = new CustomAdapter(this, R.layout.list_row, userList);
-                listView.setAdapter(customAdapter);
+            Boolean fileExists = file.exists();
+            //userList = (ArrayList<UserInfo>)savedInstanceState.getSerializable("saved");
+            if (fileExists == true){
+                fragment.displayDataFromFile();
             }
+//            if (userList != null){
+////                customAdapter = new CustomAdapter(this, R.layout.list_row, userList);
+////                listView.setAdapter(customAdapter);
+//            }
             else{
 
                 Log.d("MAIN", "Saved = null");
@@ -283,8 +292,53 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+//
+//        SearchManager searchManager = (SearchManager) getSystemService(MainActivity.mContext.SEARCH_SERVICE);
+//        SearchView searchView = (SearchView) menu.findItem(R.id.search_menu_item).getActionView();
+//
+//        if (null != searchView) {
+//            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//                @Override
+//                public boolean onQueryTextSubmit(String s) {
+//                    return false;
+//                }
+//
+//                @Override
+//                public boolean onQueryTextChange(String s) {
+//                    listView = (ListView) findViewById(R.id.listView);
+//                    if (TextUtils.isEmpty(s)){
+//                        listView.clearTextFilter();
+//                    }
+//                    else {
+//                        listView.setFilterText(s);
+//                    }
+//                    return true;
+//                }
+//            });
+//           // searchView.setSubmitButtonEnabled(true);
+//        }
+
+        //return super.onCreateOptionsMenu(menu);
         return true;
     }
+
+//    @Override
+//    public boolean onQueryTextChange(String string){
+//        final ListView listView = (ListView) findViewById(R.id.listView);
+//        if (TextUtils.isEmpty(string)){
+//            listView.clearTextFilter();
+//        }
+//        else {
+//            listView.setFilterText(string);
+//        }
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onQueryTextSubmit(String query){
+//        return false;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

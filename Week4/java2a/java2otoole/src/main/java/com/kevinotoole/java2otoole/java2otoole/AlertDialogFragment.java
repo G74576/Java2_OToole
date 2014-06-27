@@ -28,10 +28,15 @@ import java.util.ArrayList;
  */
 public class AlertDialogFragment extends DialogFragment {
 
-    public enum  DialogType {SEARCH, INFO, FAVORITES, PREFERENCES};
+    public enum  DialogType {SEARCH, FAVORITES, PREFERENCES};
 
     public static DialogType type;
 
+    public static EditText searchWord;
+
+    public CustomAdapter adapter;
+
+    @SuppressWarnings("unchecked")
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -43,13 +48,15 @@ public class AlertDialogFragment extends DialogFragment {
             case SEARCH:
                 //Get custom view:
                 final View view = inflater.inflate(R.layout.search_alert_dialog, null);
+
                 builder.setView(view)
                     //Add action buttons:
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            EditText searchWord = (EditText)view.findViewById(R.id.searchEditText);
+//                            searchWord = (EditText)view.findViewById(R.id.searchEditText);
+//                            adapter.search(searchWord.getText().toString());
 
                         }
                     })
@@ -58,12 +65,10 @@ public class AlertDialogFragment extends DialogFragment {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             AlertDialogFragment.this.getDialog().cancel();
+//                            searchWord.setText("");
+//                            adapter.search(searchWord.getText().toString());
                         }
                     });
-
-                break;
-
-            case INFO:
 
                 break;
 
