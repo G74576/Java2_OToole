@@ -15,8 +15,6 @@ import android.widget.TextView;
 
 import com.kevinotoole.java2otoole.java2otoole.imageLoader.ImageLoader;
 
-import org.w3c.dom.Text;
-
 /**
  * Author: Kevin OToole
  * Java 2 Term 1406
@@ -32,7 +30,7 @@ public class DetailActivityFragment extends Fragment implements View.OnClickList
     ImageView profileImage, searchImage;
     TextView user_name, full_name, likes_count;
     Button searchBtn;
-    String imageLink, likeCount;
+    String imageLink;
     RatingBar ratingBar;
 
     @Override

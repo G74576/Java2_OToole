@@ -212,25 +212,6 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
                 ratingForFile = ("Username: " + detail_userName + " Rating: " + detail_rating.toString());
                 ratingArray.add(ratingForFile);
 
-//                File rateFile = new File(ratingFileName);
-//                if (rateFile.exists()==false){
-//                    //rateFile.createNewFile();
-//                    fileManager.WriteFileToString(mContext, ratingFileName, ratingForFile);
-//                    //rateFile.createNewFile();
-//                }else {
-//                    fileManager.WriteToFileString(mContext, ratingFileName, ratingFileName, true);
-//                }
-////                    FileWriter fileWriter = new FileWriter(ratingFileName,true);
-////                    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-////                    bufferedWriter.write(ratingForFile + "\n");
-////                    bufferedWriter.newLine();
-////                    bufferedWriter.close();
-////                    PrintWriter out = new PrintWriter(rateFile);
-////                    out.append(ratingForFile + "\n");
-////                    out.close();
-//                //                fileManager.WriteFileToString(mContext, ratingFileName, ratingForFile);
-
-
                 //Alert of rating of image from detail view:
                 AlertDialog.Builder ratingAlert = new AlertDialog.Builder(mContext);
                 LayoutInflater inflater = getLayoutInflater();

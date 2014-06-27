@@ -1,9 +1,14 @@
 package com.kevinotoole.java2otoole.java2otoole;
 
 import java.io.Serializable;
-
 /**
- * Created by kevinotoole on 6/16/14.
+ * Author: Kevin OToole
+ * Java 2 Term 1406
+ * Week 4 Project
+ * Project: USMC Instagram Photos
+ * Package: com.kevinotoole.java2otoole.java2otoole;
+ * File: UserInfo.java
+ * Purpose:
  */
 public class UserInfo implements Serializable {
     private static long serialVersionUID = 1L;

@@ -1,13 +1,18 @@
 package com.kevinotoole.java2otoole.java2otoole;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 /**
- * Created by kevinotoole on 6/26/14.
+ * Author: Kevin OToole
+ * Java 2 Term 1406
+ * Week 4 Project
+ * Project: USMC Instagram Photos
+ * Package: com.kevinotoole.java2otoole.java2otoole;
+ * File: InfoActivity.java
+ * Purpose: This activity holds the information about the developer of this application:
  */
 public class InfoActivity extends Activity implements View.OnClickListener{
 

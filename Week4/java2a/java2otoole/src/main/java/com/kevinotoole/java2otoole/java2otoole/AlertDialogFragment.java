@@ -3,38 +3,35 @@ package com.kevinotoole.java2otoole.java2otoole;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import java.io.File;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 /**
- * Created by kevinotoole on 6/24/14.
+ * Author: Kevin OToole
+ * Java 2 Term 1406
+ * Week 4 Project
+ * Project: USMC Instagram Photos
+ * Package: com.kevinotoole.java2otoole.java2otoole;
+ * File: AlertDialogFragment.java
+ * Purpose: This is used to create alert dialogs for the action bar icons
  */
 public class AlertDialogFragment extends DialogFragment {
 
-    public enum  DialogType {SEARCH, FAVORITES, PREFERENCES};
+    public enum  DialogType {SEARCH, FAVORITES, PREFERENCES}
 
     public static DialogType type;
 
-    public static EditText searchWord;
+    //public static EditText searchWord;
 
-    public CustomAdapter adapter;
+   // public CustomAdapter adapter;
 
     @SuppressWarnings("unchecked")
     @Override
